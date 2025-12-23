@@ -1,33 +1,34 @@
 package com.netcracker.maas.declarative.kafka.client;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @Slf4j
 public class SyncBarrier {
-    private final BlockingDeque<String> queue = new LinkedBlockingDeque<>();
+    private final ConcurrentMap<String, CountDownLatch> latches = new ConcurrentHashMap<>();
 
     public void notify(String eventName) {
         log.info("Notify: {}", eventName);
-        queue.addLast(eventName);
+        latches.computeIfAbsent(eventName, k -> new CountDownLatch(1)).countDown();
     }
 
-    @SneakyThrows
     public void await(String eventName, Duration timeout) {
         log.info("Await: {} (timeout: {})", eventName, timeout);
-        var ev = queue.poll(timeout.toMillis(), TimeUnit.MILLISECONDS);
-        if (ev == null) {
-            fail("timeout waiting event: " + eventName);
+        var latch = latches.computeIfAbsent(eventName, k -> new CountDownLatch(1));
+        try {
+            if (!latch.await(timeout.toMillis(), TimeUnit.MILLISECONDS)) {
+                fail("timeout waiting event: " + eventName);
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-        assertEquals(eventName, ev, "received event `" + ev + "' differs from expected: " + eventName);
-        log.info("Event received: {}", ev);
+        log.info("Event received: {}", eventName);
     }
 }
