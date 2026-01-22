@@ -30,4 +30,8 @@ public class SyncBarrier {
         }
         log.info("Event received: {}", eventName);
     }
+
+    public void reset() {
+        events.clear();
+    }
 }
