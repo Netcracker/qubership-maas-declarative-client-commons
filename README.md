@@ -1,22 +1,7 @@
-[![Maven build](https://github.com/Netcracker/qubership-maas-declarative-client-commons/actions/workflows/maven-deploy.yml/badge.svg)](https://github.com/Netcracker/qubership-maas-declarative-client-commons/actions/workflows/maven-deploy.yml)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?metric=coverage&project=Netcracker_qubership-maas-declarative-client-commons)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-maas-declarative-client-commons)
-[![duplicated_lines_density](https://sonarcloud.io/api/project_badges/measure?metric=duplicated_lines_density&project=Netcracker_qubership-maas-declarative-client-commons)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-maas-declarative-client-commons)
-[![vulnerabilities](https://sonarcloud.io/api/project_badges/measure?metric=vulnerabilities&project=Netcracker_qubership-maas-declarative-client-commons)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-maas-declarative-client-commons)
-[![bugs](https://sonarcloud.io/api/project_badges/measure?metric=bugs&project=Netcracker_qubership-maas-declarative-client-commons)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-maas-declarative-client-commons)
-[![code_smells](https://sonarcloud.io/api/project_badges/measure?metric=code_smells&project=Netcracker_qubership-maas-declarative-client-commons)](https://sonarcloud.io/summary/overall?id=Netcracker_qubership-maas-declarative-client-commons)
+# Archived
 
-# Maas Commons Kafka
-This module provides common part of framework to decoratively create Kafka consumers 
-and producers. Connection properties for topics are received from MaaS. Framework also 
-supports local development mode. 
+This repository is archived. No new commits should be made here.
 
-# How to start work with Maas Commons Kafka
+All source code and git history has been moved to the monorepo [qubership-core-java-libs](https://github.com/Netcracker/qubership-core-java-libs/).
 
-#### 1. Add dependency on maas-kafka-client
-
-```xml
-    <dependency>
-        <groupId>com.netcracker.cloud.maas.client</groupId>
-        <artifactId>maas-declarative-kafka-client</artifactId>
-    </dependency>
-```
+> **Note:** This repository is preserved solely for publishing Maven artifacts. Please do not delete it.
